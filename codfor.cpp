@@ -9,16 +9,24 @@ int main() {
     optimize();
   
     int t;
-    cin>>t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        
+        multiset<int> digits;
+        for (char c : s) {
+            digits.insert(c - '0');
+        }
 
-    while(t--){
-       int n,x;
-       cin>>n>>x;
-
-       for(int i=0;i<n;i++ && i<=x){
-        cout<<i<<" ";
-       }
-       cout<<endl;
+        string ans = "";
+        for (int i = 1; i <= 10; i++) {
+            int need = 10 - i;
+            auto it = digits.lower_bound(need);
+            ans += (char)(*it + '0');
+            digits.erase(it);
+        }
+        cout << ans << "\n";
     }
-  return 0;
+    return 0;
 }
