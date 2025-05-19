@@ -5,28 +5,48 @@ using namespace std;
 #define fraction() cout.unsetf(ios::floatfield); cout.precision(10); cout.setf(ios::fixed, ios::floatfield);
 #define ll long long
 
+vector<int>dp,coins;
+
+// vector<int>get(int n){
+//     vector<int>s;
+//     while(n>0){
+//      if(n%10 != 0)s.push_back(n%10);
+    
+//     n/=10;
+//     }
+//     return s;
+// }
+
+int f(int n){
+    if(n==0)return 0;
+    //if(n<=9)return 1;
+    if(dp[n]!=-2)return dp[n];
+    int result= INT_MAX;
+    //vector<int>r= get(n);
+
+    for(int i=0;i<coins.size();i++){
+        if(n-coins[i]<0)continue;
+        result = min(result,f(n-coins[i]));
+
+        
+    }
+    if(result==INT_MAX)return dp[n]=INT_MAX;
+    return dp[n]=1+result;
+}
+
 int main() {
     optimize();
-  
-    int t;
-    cin >> t;
-    while (t--) {
-        string s;
-        cin >> s;
-        
-        multiset<int> digits;
-        for (char c : s) {
-            digits.insert(c - '0');
-        }
-
-        string ans = "";
-        for (int i = 1; i <= 10; i++) {
-            int need = 10 - i;
-            auto it = digits.lower_bound(need);
-            ans += (char)(*it + '0');
-            digits.erase(it);
-        }
-        cout << ans << "\n";
-    }
+    dp.clear();
+    dp.resize(1000005,-2);
+   int n,x,a;
+   cin>>n>>x;
+   for(int i=0;i<n;i++){
+    cin>>a;
+    coins.push_back(a);
+   }
+   int aans = f(x);
+    if(f(x)!=INT_MAX)cout<<aans;
+    else cout<<-1<<endl;
+    
     return 0;
 }
