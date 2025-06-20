@@ -17,27 +17,26 @@ const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
 void solve() {
-    int n;
-    cin>>n;
-    set<int>people;
+    /* Your code here */
 
-    for(int i=1;i<=n;i++){
-        people.insert(i);
+    int n,s;
+    cin>>n>>s;
+
+    int mxno = s,mnno=s;
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        mxno = max(mxno,a);
+        mnno = min(mnno,a);
     }
 
-    auto it = people.begin();
-    while(!people.empty()){
-        ++it;
-        
-        if(it==people.end())it=people.begin();
-        cout<<*it<<" ";
+ 
 
-        auto to_erase = it++;
-        if(it==people.end())it=people.begin();
-        people.erase(to_erase);
-    }
-    cout<<endl;
-
+    int fh,sh;
+    fh = s-mnno;
+    sh = mxno-s;
+    int ans  = 2*min(fh,sh)+max(fh,sh);
+    cout<<ans<<endl;
 }
 
 int main() {
@@ -49,7 +48,7 @@ int main() {
     #endif
     
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while(t--) {
         solve();
     }
