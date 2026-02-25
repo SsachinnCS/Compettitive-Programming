@@ -1,26 +1,26 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-#define optimize() ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#define ll long long
-const int N = 1e5 + 10;
-const int INF = 1e9 + 10;
 
 int main(){
 
     string s;
     cin>>s;
+    if(s.empty())return 0;
+    int ans = 1,cnt=1;
 
-   ll cnt = 1;
-    ll mxcnt = 1;
-   for(int i=1;i<s.size();++i){
-    if(s[i]==s[i-1]){
-        cnt++;
-    mxcnt = max(cnt,mxcnt);
+    int j=0;
+    for(int i=1;i<s.size();i++){
+        if(s[i]==s[i-1])cnt++;
+
+        else cnt=1;
+        ans = max(ans,cnt);
     }
-    else cnt=1;
-   }
+    
 
+    cout<<ans;
+    return 0;
+   
 
-    cout<<mxcnt<<endl;
+  
+
 }
