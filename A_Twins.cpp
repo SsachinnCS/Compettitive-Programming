@@ -16,26 +16,27 @@ const int N = 1e5 + 10;
 const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
-long long cnt[N];
-long long dp[N];
 void solve() {
-    int n,a,mx_val=0;
+    int n,sum=0;
     cin>>n;
+
+    vector<int>arr(n+1);
     for(int i=0;i<n;i++){
-        cin>>a;
-        cnt[a]++;
-        mx_val = max(mx_val,a);
+        cin>>arr[i];
+        sum+=arr[i];
     }
 
-    dp[0]=0;
-    dp[1]=cnt[1];
+    int need = sum/2,cnt=0,ans=0;
+    sort(arr.begin(),arr.end());
 
-    for(int i=2;i<=mx_val;i++){
-        dp[i]=max(dp[i-1],dp[i-2]+(1LL*cnt[i]*i) );
+    for(int i=arr.size()-1;i>=0;i--){
+        ans+=arr[i];
+        cnt++;
+        if(ans>need){
+            cout<<cnt;
+            return;
+        }
     }
-
-    cout<<dp[mx_val]<<endl;
-
 }
 
 int main() {

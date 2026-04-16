@@ -16,26 +16,20 @@ const int N = 1e5 + 10;
 const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
-long long cnt[N];
-long long dp[N];
 void solve() {
-    int n,a,mx_val=0;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        cin>>a;
-        cnt[a]++;
-        mx_val = max(mx_val,a);
+    string s;
+    cin>>s;
+    string ans = "";
+    for(auto ch:s){
+        if(ch == 'A'  || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'Y' || ch == 'y' )continue;
+
+        else{
+            ch = (tolower(ch));
+            ans=ans+ '.' + ch;
+        }
     }
 
-    dp[0]=0;
-    dp[1]=cnt[1];
-
-    for(int i=2;i<=mx_val;i++){
-        dp[i]=max(dp[i-1],dp[i-2]+(1LL*cnt[i]*i) );
-    }
-
-    cout<<dp[mx_val]<<endl;
-
+    cout<<ans<<endl;
 }
 
 int main() {

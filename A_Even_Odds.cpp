@@ -16,25 +16,13 @@ const int N = 1e5 + 10;
 const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
-long long cnt[N];
-long long dp[N];
 void solve() {
-    int n,a,mx_val=0;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        cin>>a;
-        cnt[a]++;
-        mx_val = max(mx_val,a);
-    }
+    ll n,k;
+    cin>>n>>k;
 
-    dp[0]=0;
-    dp[1]=cnt[1];
-
-    for(int i=2;i<=mx_val;i++){
-        dp[i]=max(dp[i-1],dp[i-2]+(1LL*cnt[i]*i) );
-    }
-
-    cout<<dp[mx_val]<<endl;
+    ll odd = (n+1) / 2;
+    if(k<=odd)cout<<(2*k)-1<<endl;
+    else cout<<(2*(k-odd))<<endl;
 
 }
 

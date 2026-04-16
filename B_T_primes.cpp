@@ -16,26 +16,42 @@ const int N = 1e5 + 10;
 const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
-long long cnt[N];
-long long dp[N];
+const int MAX_NO = 1000005;
+bool is_prime[MAX_NO];
+
+void sieve(){
+    fill(is_prime,is_prime+MAX_NO,true);
+    is_prime[0]=is_prime[1]=false;
+
+    for(int p=2;1LL*p*p <MAX_NO ;p++){
+        if(is_prime[p]){
+            for(int i=p*p;i<MAX_NO;i+=p)is_prime[i]=false;
+        }
+    }
+}
+
+bool check(ll a){
+    if(a<4)return false;
+    ll no = round(sqrt(a));
+    if(no*no == a && is_prime[no])return true;
+    return false;
+}
+
 void solve() {
-    int n,a,mx_val=0;
+    sieve();
+    int n;
     cin>>n;
-    for(int i=0;i<n;i++){
+
+    while(n--){
+
+        ll a,cnt=0;
+
         cin>>a;
-        cnt[a]++;
-        mx_val = max(mx_val,a);
+
+       if(check(a))cout<<"YES"<<endl;
+      
+        else cout<<"NO"<<endl;
     }
-
-    dp[0]=0;
-    dp[1]=cnt[1];
-
-    for(int i=2;i<=mx_val;i++){
-        dp[i]=max(dp[i-1],dp[i-2]+(1LL*cnt[i]*i) );
-    }
-
-    cout<<dp[mx_val]<<endl;
-
 }
 
 int main() {
@@ -53,4 +69,4 @@ int main() {
     }
     
     return 0;
-}
+}   

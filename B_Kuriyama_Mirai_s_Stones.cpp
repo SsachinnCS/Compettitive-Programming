@@ -16,25 +16,34 @@ const int N = 1e5 + 10;
 const int INF = 1e9 + 10;
 const int MOD = 1e9 + 7;
 
-long long cnt[N];
-long long dp[N];
+long long a[N];
+long long b[N];
+
+long long pre1[N],pre2[N];
 void solve() {
-    int n,a,mx_val=0;
+    int n;
     cin>>n;
-    for(int i=0;i<n;i++){
-        cin>>a;
-        cnt[a]++;
-        mx_val = max(mx_val,a);
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        b[i]=a[i];
+        pre1[i] = pre1[i-1]+a[i];
     }
 
-    dp[0]=0;
-    dp[1]=cnt[1];
-
-    for(int i=2;i<=mx_val;i++){
-        dp[i]=max(dp[i-1],dp[i-2]+(1LL*cnt[i]*i) );
+    sort(b+1,b+1+n);
+    for(int i=1;i<=n;i++){
+        pre2[i]=pre2[i-1]+b[i];
     }
 
-    cout<<dp[mx_val]<<endl;
+    
+    int m;
+    cin>>m;
+    int  ty,l,r;
+    while(m--){
+        
+        cin>>ty>>l>>r;
+        if(ty==1)cout<<pre1[r]-pre1[l-1]<<endl;
+        else cout<<pre2[r]-pre2[l-1]<<endl;
+    }
 
 }
 
